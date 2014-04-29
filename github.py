@@ -4,8 +4,8 @@ from functools import wraps
 from pprint import pformat
 
 DEFAULT_SETTINGS = {
-    'debug_mode': False,
-    'github_hostnames': ['github.com']
+    'debug_mode': True,
+    'github_hostnames': ['stash.hq.practicefusion.com']
 }
 
 plugin_dir = os.path.abspath(os.path.dirname(__file__))
@@ -105,6 +105,7 @@ class GitRepo(object):
           if remote.startswith('git@' + hostname):
               return self.parse_ssh_remote(remote_alias, remote)
           elif remote.startswith('https://' + hostname):
+              log("stat")
               return self.parse_http_remote(remote_alias, remote)
           return None
 
@@ -132,11 +133,13 @@ class GitRepo(object):
         name = web_uri.split('/')[-1]
         account = web_uri.split('/')[-2]
         username, password = extract_http_auth_credentials(uri)
+        stash_url = github_hostnames[0] + '/projects/' + account + '/repos/' + name
+        log('stash: ' + stash_url)
 
         return {
             'remote_alias': remote_alias,
             'protocol': 'http',
-            'web_uri': web_uri,
+            'web_uri': stash_url,
             'remote_uri': remote_uri,
             'repository_name': name,
             'account': account,
@@ -226,12 +229,12 @@ def with_repo(func):
             sublime.message_dialog("Github repository not found.")
         except (NoFileOpenError):
             sublime.message_dialog("Please open a file first.")
-    
+
     return wrapper
 
 
 def git_browse_file_url(repository, filepath, branch='master'):
-    return "https://%s/blob/%s%s" % (repository, branch, filepath)
+    return "https://%s/browse%s?at=%s" % (repository, filepath, branch)
 
 
 def git_blame_file_url(repository, filepath, revision):

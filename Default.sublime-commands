@@ -1,30 +1,30 @@
 [
   {
-    "caption": "Github: Open File",
+    "caption": "Stash: Open File",
     "command": "github_open"
   },
   {
-    "caption": "Github: Blame",
+    "caption": "Stash: Blame",
     "command": "github_blame"
   },
   {
-    "caption": "Github: Plugin Settings",
+    "caption": "Stash: Plugin Settings",
     "command": "github_plugin_settings"
   },
   {
-    "caption": "Github: Copy Link To File",
+    "caption": "Stash: Copy Link To File",
     "command": "github_copy_link"
   },
   {
-    "caption": "Github: Repository",
+    "caption": "Stash: Repository",
     "command": "github_repository"
   },
   {
-    "caption": "Github: Issues",
+    "caption": "Stash: Issues",
     "command": "github_issues"
   },
   {
-    "caption": "Github: Pull Requests",
+    "caption": "Stash: Pull Requests",
     "command": "github_pulls"
   },
 ]
